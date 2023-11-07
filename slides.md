@@ -35,217 +35,331 @@ layout: default
 
 # Introduction 
 
-- Cloud computing offers numerous advantages, including cost savings, scalability, and ease of storage.
-- Containers have emerged as a simplified approach to virtualization, providing benefits over traditional virtual machines.
-- Containers share the host kernel, resulting in lower overhead and simplified deployment.
-- They are widely used in various applications, making cloud environments more efficient.
+- Containers are lightweight virtualization that shares host kernel
+- This leads to security issues like host access and limited isolation
+- Docker is the most popular container technology
+- Docker-sec secures containers by implementing access policies to limit capabilities
+
 
 ---
 layout: default
-level: 2
 ---
 
 ![Figure 1](/intro1.png)
 ---
 layout: default
-level: 2
 ---
 
-# Addressing Container Security Challenges
+# Background
 
-- Containers are more vulnerable to attacks than virtual machines due to shared kernels.
-- Security solutions like AppArmor and SELinux can enhance container security.
-- Introducing Docker-sec, an automated security system with access policies and vulnerability scanning.
-- The goal is to protect containers from attacks on both the server and container engine while minimizing performance impact.
-
----
-layout: default
-level: 2
----
-
-# Managing Container Vulnerabilities
-
-- Container vulnerabilities can arise from insecure libraries, dependencies, or malicious code.
-- Scanning container images helps identify known vulnerabilities.
-- Challenges include detecting undiscovered vulnerabilities and the limitations of image scanners.
-- Container security involves addressing malicious container images and application vulnerabilities.
+- Containers vs virtual machines - architecture, performance, isolation
+- Docker components - engine, client, daemon, containerd
+- Container image creation and lifecycle management
 
 ---
 layout: default
 ---
 
-# Related Work
+# Container vs Virtual Machines
 
-- Introduction to studies and research on container security.
-- Differentiating between static and dynamic schemes for vulnerability detection.
-- Highlighting the relevance of real-life scenarios in assessing container security.
-- Summarizing findings related to Docker's security and its popularity.
-
----
-layout: default
-level: 2
----
-
-# Docker and Its Contribution to Network Security
-
-- Discussing the impact of Docker on network security.
-- Highlighting the benefits of Docker for edge computing.
-- Analyzing the role of Docker in improving data center efficiency.
-- Presenting studies on resource allocation for Docker-based applications.
-
----
-layout: default
-level: 2
----
-
-# Continuous Security Assessment for Docker
-
-- Introducing continuous security assessment in Docker development.
-- Explaining the importance of verifying Docker image security.
-- Presenting methods for dynamic analysis and security assessment.
-- Highlighting the findings of research on Docker's security features and vulnerabilities.
+- Overhead:
+  - Containers have less overhead than virtual machines. 
+  - Containers run through a shared kernel with the host computer, resulting in lower resource usage compared to VMs .
+- Isolation:
+  - Containers are considered to be more vulnerable to attacks.
+  - Containers and hosts share the same kernel, malicious containers can potentially exploit the host kernel.
 
 ---
 layout: default
 ---
 
-# Proposed Docker-Security Design
+# Container vs Virtual Machines
 
-- Introduction to Docker as a leading container solution.
-- The direct communication between containers and the host core.
-- The importance of addressing security concerns.
-- Reference to Docker-Sec for security solutions.
-- Docker's security scanning for vulnerability detection.
+- Deployment Efficiency:
+  - Containers can run on the same operating system, making the server more efficient and allowing for faster application deployment.
+  - Multiple containers can be bundled into a single operating system, reducing complexity and dependencies .
+- Security Concerns
+  - Containers have been found to have security problems, including malicious container images and vulnerabilities in container applications.
+  - Automated and standardized approaches are needed to implement security updates to Docker images .
+
+---
+layout: default
+---
+
+# Container vs Virtual Machines
+
+- Performance: 
+  - Docker containers, in particular, are described as having better performance and lower computational cost compared to virtual machines.
+  - They offer advantages such as speed, portability, scalability, and rapid delivery.
+
+
+---
+layout: default
+---
+
+# Docker Components
+
+- Engine: 
+  - Client-server program responsible for creating and running Docker containers. 
+- Client :
+  - Command-line interface (CLI) tool that allows users to interact with the Docker daemon and perform various operations related to Docker containers and images. 
+- Daemon :  
+  - Background process that runs on a host machine and is responsible for managing Docker containers.
+  - Core component of the Docker Engine and handles the creation, execution, and monitoring of containers. 
+- Containerd :
+  - Open-Source container runtime that provides a platform-agnostic interface for managing container lifecycle operations, such as creating, running, and deleting containers.
+
+---
+layout: default
+---
+
+# Container Image Creation and Lifecycle Management
+
+- Image Creation: 
+  - Images are the building blocks of containers. 
+Contains the necessary files, libraries, and configurations required to run an application. 
+Images can be created manually or automatically using tools like Dockerfile, which specifies the steps to build an image. 
+The process involves selecting a base image, adding dependencies, configuring the environment, and packaging the application code.
+
+---
+layout: default
+---
+
+# Container Image Creation and Lifecycle Management
+
+- Image Versioning: 
+  - Container images can have multiple versions to track changes and updates. Versioning allows for easy rollback to a previous version if issues arise.
+  - It is important to maintain a versioning strategy and use appropriate tagging conventions to manage and track image versions effectively.
+
+- Image Registry: 
+  - Container images are stored in a registry, which acts as a cenralized repository. 
+  - Registry allows users to push and pull images, making them accessible to different environments and users. 
+  - Examples are Docker Hub, Google Container Registry, and Amazon Elastic Container Registry.
+
+---
+layout: default
+---
+
+# Container Image Creation and Lifecycle Management
+
+- Image Distribution: 
+  - Container images need to be distributed across different environments, such as development, testing, and production. 
+  - This can be done manually or through automated processes like continuous integration and deployment pipelines. 
+  - Proper image distribution ensures consistency and reproducibility across different environments.
+
+- Image Security: 
+  - Container images should be scanned for vulnerabilities and security issues before deployment. 
+  - Vulnerability scanning tools can analyze the image and identify any known vulnerabilities in the software packages and libraries included in the image. 
+  - Regular scanning and updating of images help mitigate security risks.
+
+---
+layout: default
+---
+
+# Container Image Creation and Lifecycle Management
+
+- Image Lifecycle Management: 
+  - Container images have a lifecycle that includes creation, distribution, deployment, and retirement. 
+  - It is important to have a well-defined process for managing image lifecycles, including version control, image promotion, and image deprecation. 
+  - This ensures that only trusted and up-to-date images are used in production environments.
+
+---
+layout: default
+---
+# Container Security Concerns
+
+- Vulnerable images - dependencies, supply chain attacks
+- Host kernel access - quickly escape isolation
+- Resource sharing - processes, filesystem, network
+- Limited isolation - namespaces, capabilities
+
+---
+layout: default
+---
+
+# Proposed Docker-Sec System
+
+- Implements mandatory access control policies
+- Constraints containers based on expected usage
+- Static analysis for initial rules, dynamic monitoring adds rules
 <br/>
 <br/>
 <img src="/intro2.png" alt="Figure 2" class="m-auto"/>
 
 ---
 layout: default
-level: 2
 ---
 
 <img src="/proposed.png" alt="Proposed System" width="470" height="120" class="m-auto"/>
 
----
-layout: default
-level: 2
----
-# Isolation Mechanisms for Container Security
-
-- Overview of Linux namespaces for container sandboxing.
-- Explaining PID namespaces and their role in process isolation.
-- Filesystem isolation and securing access to host file systems.
-- Network isolation in Docker and its approach to protecting communication.
-- The significance of Docker vulnerability scanning in enhancing security.
-
----
-layout: default
-level: 2
----
-
-# Docker-Sec and Continuous Vulnerability Scanning
-
-- Introduction to Docker-Sec and its role in security.
-- Explanation of Docker profiles created for added protection.
-- The process of Docker image scanning for vulnerabilities.
-- Emphasizing the importance of continuous security assessment.
-- The role of Docker-Sec in creating security profiles for containers.
 
 ---
 layout: default
 ---
 
-# Results
+# Docker-Sec Architecture
 
-- Introduction to the performance assessment of Docker-Sec.
-- Explanation of the assessment in two directions.
-- Mention of workloads tested using primary operating system tools.
-- Differentiation between secure Docker-sec and disabled containers.
-- Performance time calculation and case scenarios.
-<br/>
-<img src="/intro3.png" alt="Figure 3" class="m-auto"/>
----
-layout: default
-level: 2
----
-
-# Docker-Sec Overhead Assessment Results
-
-- Overview of the assessment results for Docker-Sec's performance overhead.
-- Discussion of overhead impact on CPU-bound applications.
-- Analysis of performance tests and their impact on overhead.
-- Comparison of overhead across different image types.
-- Key findings from the performance assessment.
-
----
-layout: default
-level: 2
----
-
-# Docker-Sec's Impact on Container Performance
-
-- An overview of the impact of Docker-Sec on container performance.
-- Discussion of how Docker-Sec imposes a relatively constant overhead.
-- Explanation of factors affecting overhead, such as socket test duration.
-- Importance of assessing performance across different Dockerfiles.
-- Concluding remarks on Docker-Sec's performance impact.
+- Docker client, daemon, containerd runtime
+- Static analyzer, dynamic monitor
+- AppArmor profiles containers
+- Vulnerability scanner checks images
 
 ---
 layout: default
 ---
 
-# Discussion
+# Creating Container Profiles
 
-- Overview of the Docker-Sec framework.
-- Description of its use of the Docker GUI with the -sec suffix.
-- Mention of the use of AppArmor and a bash-wrapping efficiency.
-- Key aspects of interaction with Docker-Sec, including creating containers and AppArmor profiles.
-- Explanation of two scenarios covered in the demonstration section.
+- Extracts rules from config and expected usage
+- Monitors container during training phase
+- Limits capabilities to minimum required
 
 ---
 layout: default
-level: 2
 ---
 
-# Scenario 1 - Customized Security Profile
+# Creating AppArmor Profiles 
 
-- Detailed explanation of the first scenario.
-- Steps involved in creating a customized security profile for a specific container.
-- Mention of launching a WordPress container with a profile generated by static testing.
-- Description of dynamic control engine checks during the configuration.
-- Discussion on how the dynamic profile interacts with the static profile during training.
+- Docker-sec aims to create highly customized AppArmor profiles for each container to enhance container security . 
+- Two main strategies: 
+  - Static Analysis
+  - Dynamic Testing.
 
 ---
 layout: default
-level: 2
+---
+
+# Static Analysis
+
+- Generate the initial Docker profiles. 
+- Gathers valuable static information about the container and accesses its configuration. 
+- Collects information such as the container name, version, package manager, description of the fundamental components, and known vulnerabilities associated with those components. 
+- This information is used to construct the initial set of access rules for the container .
+
+---
+layout: default
+---
+
+# Dynamic Testing
+
+- Improve the Docker profiles during container runtime.
+- Monitors the container's behavior and extracting additional rules that further constrain the container's capabilities.
+- Allows Docker-sec to represent the actual application behavior, file system, processes, and network isolation in the profiles. 
+- By tracking the container's execution in real-time, Docker-sec can extract rules that provide more rigorous protection if needed .
+
+---
+layout: default
+---
+
+# Creating AppArmor Profiles 
+
+- Combination of static analysis and dynamic testing enables Docker-sec to create highly customized AppArmor profiles for each container.
+- The initial profiles are based on the container's settings, such as the mounted directories and files. 
+- These profiles are then dynamically enhanced with rules extracted during the container's execution. 
+- This approach ensures that the profiles accurately reflect the container's behavior and provide effective security measures .
+- Docker-sec enhances container security by restricting the container's access to resources and minimizing the attack surface. 
+- The profiles define the allowed accesses and enforce them, preventing unauthorized actions and reducing the risk of container-based attacks .
+
+---
+layout: default
+---
+
+# Building Secured RunC Profile
+
+- RunC directly interacts with containers
+- RunC
+  - Lightweight, portable command-line tool that provides the runtime environment for containers. 
+  - Open-source implementation of the Open Container Initiative (OCI) runtime specification . 
+  - Responsible for creating and managing containers based on OCI-compliant container images.
+- Locked down profile prevents host access
+- Allows only essential capabilities
+
+---
+layout: default
+---
+
+# Securing Docker Daemon
+
+- Daemon runs and manages containers
+- Profile limits access to required services
+- Prevents unauthorized changes
+
+---
+layout: default
+---
+
+# Process Isolation
+
+- PID namespaces separate container processes
+- Capabilities limit process interactions
+- Prevents inter-container attacks
+
+---
+layout: default
+---
+
+# Filesystem Isolation
+
+- Mount namespaces separate filesystem
+- Remove capabilities to limit access
+- Protects host filesystem from containers
+
+---
+layout: default
 ---
 
 <img src="/intro4.png" alt="Figure 4" width="670" height="160" class="m-auto"/>
 
 ---
 layout: default
-level: 2
 ---
 
-# Scenario 2 - Benchmarking and Performance Testing
+# Network Isolation
 
-- Explanation of the second scenario.
-- Details on running Docker-Sec for different Docker images with various capabilities.
-- Association of generated profiles with containers using similar images.
-- Discussion of performance benchmarks, including high application loads and computer stress loads.
-- Importance of testing Docker-Sec in real-life and demanding situations.
+- Network namespaces for separate stacks
+- Limit connectivity between containers
+- Prevents snooping and MITM attacks
 
 ---
 layout: default
-level: 2
 ---
 
 ![Figure 5](/intro5.png)
 
 ---
 layout: default
-level: 2
+---
+
+# Vulnerability Scanning
+
+- Checks images against CVE databases
+- Identifies flaws like SQLi, XSS, injections
+- Addresses vulnerabilities proactively
+
+---
+layout: default
+---
+
+# Evaluation Methodology
+
+- Compare secured vs unsecured containers
+- Different workloads - CPU, memory, disk, network
+- Measure performance overhead
+<br/>
+<img src="/intro3.png" alt="Figure 3" class="m-auto"/>
+
+---
+layout: default
+---
+
+# Performance Overhead
+
+- Low overhead around 2-4% for container startup
+- Minimal impact on application performance
+- Acceptable cost for significantly improved security
+
+---
+layout: default
 ---
 
 <div class="flex space-x-4">
@@ -261,14 +375,45 @@ level: 2
 layout: default
 ---
 
-# Conclusion
+# Container Isolation
 
-- Overview of the advantages of container virtualization over hypervisor virtualization.
-- Emphasis on the performance and security analysis of Docker, a popular container-based technology.
-- Importance of vulnerability management in the context of containers and cloud-native technology.
-- Mention of potential future tasks, such as comparing Docker container security with other technologies.
-- Discussion on the improved stability and performance of Docker containers with modified default configurations.
-- Summary of benchmark results indicating minimal overhead for a strain file system.
+- Prevents inter-container attacks and limits host access
+- Reduces attack surface through restricted capabilities
+
+---
+layout: default
+---
+
+# Implementation
+
+- Additional Docker client commands for security functions
+- User interface provides visibility into profiles
+
+---
+layout: default
+---
+
+# Use Cases
+
+- WordPress container deployment
+- Arbitrary application containers
+- Simulated attacks for validation
+
+---
+layout: default
+---
+
+# Conclusions
+
+- Docker-sec constrains containers to only legitimate access
+ -Low performance overhead around 2-4%
+- Significantly enhances container security
+
+---
+layout: section
+---
+
+# Questions
 
 ---
 layout: section
