@@ -74,7 +74,7 @@ layout: default
 level: 2
 ---
 
-# Container vs Virtual Machines
+# Containers vs Virtual Machines
 
 - Overhead:
   - Containers have less overhead than virtual machines. 
@@ -88,26 +88,11 @@ layout: default
 level: 2
 ---
 
-# Container vs Virtual Machines
+# Containers vs Virtual Machines
 
-- Deployment Efficiency:
-  - Containers can run on the same operating system, making the server more efficient and allowing for faster application deployment.
-  - Multiple containers can be bundled into a single operating system, reducing complexity and dependencies .
 - Security Concerns
   - Containers have been found to have security problems, including malicious container images and vulnerabilities in container applications.
   - Automated and standardized approaches are needed to implement security updates to Docker images .
-
----
-layout: default
-level: 2
----
-
-# Container vs Virtual Machines
-
-- Performance: 
-  - Docker containers, in particular, are described as having better performance and lower computational cost compared to virtual machines.
-  - They offer advantages such as speed, portability, scalability, and rapid delivery.
-
 
 ---
 layout: default
@@ -142,25 +127,9 @@ level: 2
 
 - Image Creation: 
   - Images are the building blocks of containers. 
-Contains the necessary files, libraries, and configurations required to run an application. 
-Images can be created manually or automatically using tools like Dockerfile, which specifies the steps to build an image. 
-The process involves selecting a base image, adding dependencies, configuring the environment, and packaging the application code.
-
----
-layout: default
-level: 2
----
-
-# Container Image Creation and Lifecycle Management
-
-- Image Versioning: 
-  - Container images can have multiple versions to track changes and updates. Versioning allows for easy rollback to a previous version if issues arise.
-  - It is important to maintain a versioning strategy and use appropriate tagging conventions to manage and track image versions effectively.
-
-- Image Registry: 
-  - Container images are stored in a registry, which acts as a cenralized repository. 
-  - Registry allows users to push and pull images, making them accessible to different environments and users. 
-  - Examples are Docker Hub, Google Container Registry, and Amazon Elastic Container Registry.
+  - Contains the necessary files, libraries, and configurations required to run an application. 
+  - Images can be created manually or automatically using tools like Dockerfile, which specifies the steps to build an image. 
+  - The process involves selecting a base image, adding dependencies, configuring the environment, and packaging the application code.
 
 ---
 layout: default
@@ -181,28 +150,67 @@ level: 2
 
 # Container Image Creation and Lifecycle Management
 
+- Image Registry: 
+  - Container images are stored in a registry, which acts as a cenralized repository. 
+  - Registry allows users to push and pull images, making them accessible to different environments and users. 
+  - Examples are Docker Hub, Google Container Registry, and Amazon Elastic Container Registry.
+
 - Image Security: 
   - Container images should be scanned for vulnerabilities and security issues before deployment. 
   - Vulnerability scanning tools can analyze the image and identify any known vulnerabilities in the software packages and libraries included in the image. 
   - Regular scanning and updating of images help mitigate security risks.
 
-- Image Lifecycle Management: 
-  - Container images have a lifecycle that includes creation, distribution, deployment, and retirement. 
-  - It is important to have a well-defined process for managing image lifecycles, including version control, image promotion, and image deprecation. 
-  - This ensures that only trusted and up-to-date images are used in production environments.
-
 ---
 layout: default
 ---
-# Container Security Concerns
+# Literature Survey
 
-- Vulnerable images - dependencies, supply chain attacks
-- Host kernel access - quickly escape isolation
-- Resource sharing - processes, filesystem, network
-- Limited isolation - namespaces, capabilities
+- <b>N. Tabassum, T. Alyas, M. Hamid, M. Saleem, S. Malik, and S. Binish Zahra, “Qos based cloud security evaluation using neuro fuzzy model,” </b>
+  -  DIVA System 
+  -  Analyzed 356,218 images : 
+     -  Contain more than 180 errors on average, taking into account all models, 
+     -  Many images have not been updated for hundreds of days 
+- <b>M. Mohamed, R. Engel, A. Warke, S. Berman, and H. Ludwig, “Extensible persistence as a service for containers,” </b>
+  - Explored the vulnerability-oriented of the Docker Environment
+  - Explored safety consequences of using containers on traditional applications. 
+  - Docker can help in all solutions for container security. 
 
 <!--
-Containers have several security concerns including vulnerable images due to issues with dependencies or supply chain attacks during development. Containers can quickly escape isolation and gain host kernel access. They share resources like processes, filesystem and network with the host and other containers. Namespaces and capabilities provide more limited isolation than VMs.
+DIVA System that automatically finds installations and parses public and group images in the Docker Hub
+-->
+
+---
+layout: default
+level: 2
+---
+# Literature Survey
+ 
+- <b>F. D’Urso, C. Santoro, and F. F. Santoro, “Wale: a solution to share libraries in Docker containers,” </b>
+  - Described the security issues of containers and the problems associated with containers being lightweight and using the same kernel as the Host operating system.
+  - Presents four cases and solutions obtained. 
+    - Securing the container from the applications inside it, 
+    - Inter-container protection, 
+    - Protecting the host from the containers
+    - Securing the containers from a malicious or semi-honest host.
+
+<!--
+First, three use cases are handled by software, and the fourth is handled by hardware.
+-->
+
+---
+layout: default
+level: 2
+---
+# Literature Survey
+
+- <b>S. Sultan, I. Ahmad, and T. Dimitriou, “Container security: issues, challenges, and the road ahead,”</b>
+  - Described Docker and its performance analysis and took the stance that Docker has a protected layer on the container
+  - Docker used a tool known as “Docker Engine” to execute the applications. 
+  - Provided a Docker Hub for sharing applications it worked the same as virtual machines. 
+  - Described the advantages of Docker containers over virtual machines.
+
+<!--
+
 -->
 
 ---
