@@ -1,5 +1,5 @@
 ---
-theme: default
+theme: bricks
 background: https://source.unsplash.com/collection/94734566/1920x1080
 class: text-center
 highlighter: shiki
@@ -11,6 +11,7 @@ drawings:
 transition: slide-left
 title: Container Performance and Vulnerability Management for Container Security Using Docker Engine
 mdc: true
+layout: fact
 ---
 
 ## Container Performance and Vulnerability Management for Container Security Using Docker Engine
@@ -21,8 +22,13 @@ CS7A
 <br/>
 20CSA34
 
+<!-- 
+This presentation will provide an in-depth look at the research paper that proposes and evaluates a system called Docker-sec to enhance container security using the Docker engine.
+ -->
+
 ---
 layout: default
+level: 2
 ---
 
 # Contents
@@ -40,6 +46,9 @@ layout: default
 - Docker is the most popular container technology
 - Docker-sec secures containers by implementing access policies to limit capabilities
 
+<!-- 
+The introduction covers key points about how containers work as lightweight virtualization but share the host kernel. This leads to security issues like the container having access to the host and limited isolation between containers. Docker has become the most widely used container technology. The proposed Docker-sec system aims to secure containers by implementing access control policies that constrain capabilities to only legitimate needs.
+ -->
 
 ---
 layout: default
@@ -56,8 +65,13 @@ layout: default
 - Docker components - engine, client, daemon, containerd
 - Container image creation and lifecycle management
 
+<!--
+Provide detailed background comparing containers to virtual machines in terms of architecture, performance, and isolation. Explain the key Docker components like the engine which builds container images, the client and daemon for managing containers, and containerd for runtime execution. Cover how images are created and the container lifecycle is managed from build to deployment.
+ -->
+
 ---
 layout: default
+level: 2
 ---
 
 # Container vs Virtual Machines
@@ -71,6 +85,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Container vs Virtual Machines
@@ -84,6 +99,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Container vs Virtual Machines
@@ -95,6 +111,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Docker Components
@@ -111,6 +128,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Container Image Creation and Lifecycle Management
@@ -123,6 +141,7 @@ The process involves selecting a base image, adding dependencies, configuring th
 
 ---
 layout: default
+level: 2
 ---
 
 # Container Image Creation and Lifecycle Management
@@ -138,6 +157,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Container Image Creation and Lifecycle Management
@@ -147,16 +167,17 @@ layout: default
   - This can be done manually or through automated processes like continuous integration and deployment pipelines. 
   - Proper image distribution ensures consistency and reproducibility across different environments.
 
+---
+layout: default
+level: 2
+---
+
+# Container Image Creation and Lifecycle Management
+
 - Image Security: 
   - Container images should be scanned for vulnerabilities and security issues before deployment. 
   - Vulnerability scanning tools can analyze the image and identify any known vulnerabilities in the software packages and libraries included in the image. 
   - Regular scanning and updating of images help mitigate security risks.
-
----
-layout: default
----
-
-# Container Image Creation and Lifecycle Management
 
 - Image Lifecycle Management: 
   - Container images have a lifecycle that includes creation, distribution, deployment, and retirement. 
@@ -173,6 +194,10 @@ layout: default
 - Resource sharing - processes, filesystem, network
 - Limited isolation - namespaces, capabilities
 
+<!--
+Containers have several security concerns including vulnerable images due to issues with dependencies or supply chain attacks during development. Containers can quickly escape isolation and gain host kernel access. They share resources like processes, filesystem and network with the host and other containers. Namespaces and capabilities provide more limited isolation than VMs.
+-->
+
 ---
 layout: default
 ---
@@ -185,6 +210,10 @@ layout: default
 <br/>
 <br/>
 <img src="/intro2.png" alt="Figure 2" class="m-auto"/>
+
+<!--
+Docker-sec implements mandatory access control policies to constrain containers based on the expected legitimate usage of the application. It conducts static analysis to generate an initial set of security rules. Further rules are added dynamically through runtime monitoring.
+-->
 
 ---
 layout: default
@@ -204,8 +233,13 @@ layout: default
 - AppArmor profiles containers
 - Vulnerability scanner checks images
 
+<!--
+Cover Docker-sec architecture including core Docker components like client, daemon, containerd. Highlight the static analyzer, dynamic monitor, AppArmor profiler which generates custom profiles for each container, and vulnerability scanner which checks container images.
+-->
+
 ---
 layout: default
+level: 2
 ---
 
 # Creating Container Profiles
@@ -214,8 +248,13 @@ layout: default
 - Monitors container during training phase
 - Limits capabilities to minimum required
 
+<!--
+Explain in depth how Docker-sec creates highly customized AppArmor profiles for each container. Rules are extracted from the container config and expected usage parameters. The container is monitored during a training period to build the profile. This allows limiting capabilities to the bare minimum required for operation.
+-->
+
 ---
 layout: default
+level: 2
 ---
 
 # Creating AppArmor Profiles 
@@ -227,6 +266,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Static Analysis
@@ -238,6 +278,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Dynamic Testing
@@ -249,6 +290,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Creating AppArmor Profiles 
@@ -262,6 +304,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Building Secured RunC Profile
@@ -274,8 +317,13 @@ layout: default
 - Locked down profile prevents host access
 - Allows only essential capabilities
 
+<!--
+The RunC component interacts directly with containers at a low level. Docker-sec builds a locked down AppArmor profile for RunC, allowing only essential capabilities and preventing any host access through it.
+-->
+
 ---
 layout: default
+level: 2
 ---
 
 # Securing Docker Daemon
@@ -284,8 +332,13 @@ layout: default
 - Profile limits access to required services
 - Prevents unauthorized changes
 
+<!--
+Since the Docker daemon runs and manages all containers, its access is restricted through an AppArmor profile to only required services. This prevents any unauthorized changes through the daemon.
+-->
+
 ---
 layout: default
+level: 2
 ---
 
 # Process Isolation
@@ -294,8 +347,13 @@ layout: default
 - Capabilities limit process interactions
 - Prevents inter-container attacks
 
+<!--
+Docker-sec provides multi-layered process isolation using PID namespaces to separate container processes from host and other containers. Capabilities are restricted to limit inter-process interactions. This prevents inter-container attacks.
+-->
+
 ---
 layout: default
+level: 2
 ---
 
 # Filesystem Isolation
@@ -304,14 +362,20 @@ layout: default
 - Remove capabilities to limit access
 - Protects host filesystem from containers
 
+<!--
+For filesystem isolation Docker-sec uses mount namespaces to create separate filesystem views for each container. Capabilities that allow filesystem access are removed. Together this protects the host filesystem from being accessed or changed by a container.
+-->
+
 ---
 layout: default
+level: 2
 ---
 
 <img src="/intro4.png" alt="Figure 4" width="670" height="160" class="m-auto"/>
 
 ---
 layout: default
+level: 2
 ---
 
 # Network Isolation
@@ -320,14 +384,20 @@ layout: default
 - Limit connectivity between containers
 - Prevents snooping and MITM attacks
 
+<!--
+At the network level, Docker-sec uses network namespaces to create separate networking stacks for each container. Connectivity between containers is limited to only what is required. This prevents snooping or man-in-the-middle attacks between containers or from containers to the host.
+-->
+
 ---
 layout: default
+level: 2
 ---
 
 ![Figure 5](/intro5.png)
 
 ---
 layout: default
+level: 2
 ---
 
 # Vulnerability Scanning
@@ -335,6 +405,10 @@ layout: default
 - Checks images against CVE databases
 - Identifies flaws like SQLi, XSS, injections
 - Addresses vulnerabilities proactively
+
+<!--
+Docker-sec scans container images against CVE vulnerability databases to identify issues like SQL injection, XSS, unauthorized command execution before deployment. This allows vulnerabilities to be addressed proactively.
+-->
 
 ---
 layout: default
@@ -348,8 +422,13 @@ layout: default
 <br/>
 <img src="/intro3.png" alt="Figure 3" class="m-auto"/>
 
+<!--
+The researchers evaluated Docker-sec thoroughly by comparing secured containers protected by it versus unsecured containers across different workloads including CPU, memory, disk and network. They measured the performance overhead introduced by the security mechanisms.
+-->
+
 ---
 layout: default
+level: 2
 ---
 
 # Performance Overhead
@@ -357,6 +436,10 @@ layout: default
 - Low overhead around 2-4% for container startup
 - Minimal impact on application performance
 - Acceptable cost for significantly improved security
+
+<!--
+Docker-sec introduced low overhead of around 2-4% for container startup time. The impact on application performance after startup was found to be minimal. This is considered an acceptable cost for the significantly improved security provided by Docker-sec.
+-->
 
 ---
 layout: default
@@ -380,14 +463,11 @@ layout: default
 - Prevents inter-container attacks and limits host access
 - Reduces attack surface through restricted capabilities
 
----
-layout: default
----
-
-# Implementation
-
-- Additional Docker client commands for security functions
-- User interface provides visibility into profiles
+<!--
+Summarize how Docker-sec provides multi-layered isolation between containers and from the host system.
+AppArmor Profiles, Process Isolation, Filesystem Isolation, Network Isolation, Vulnerability Scanning
+This reduces the attack surface significantly by restricting container capabilities.
+-->
 
 ---
 layout: default
@@ -399,6 +479,10 @@ layout: default
 - Arbitrary application containers
 - Simulated attacks for validation
 
+<!--
+The researchers validated Docker-sec on real-world use cases including deploying a WordPress container and running arbitrary application containers. They simulated attacks against these environments to validate the security.
+-->
+
 ---
 layout: default
 ---
@@ -408,15 +492,23 @@ layout: default
 - Docker-sec constrains containers to only legitimate access
  -Low performance overhead around 2-4%
 - Significantly enhances container security
+- Additional Docker client commands for security functions
+- User interface provides visibility into profiles
+
+<!--
+In conclusion, Docker-sec successfully constrained containers by limiting access to only legitimate needs required for proper functioning. It incurred low overhead of just 2-4% in testing. Overall it significantly improves the security of Docker containers.Docker-sec implements additional Docker client commands to activate its security functions like creating profiles. It also provides a user interface that gives visibility into the generated profiles.
+-->
 
 ---
-layout: section
+layout: quote
+level: 2
 ---
 
 # Questions
 
 ---
-layout: section
+layout: statement
+level: 2
 ---
 
 # Thank You
