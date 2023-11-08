@@ -16,6 +16,8 @@ layout: fact
 
 ## Container Performance and Vulnerability Management for Container Security Using Docker Engine
 
+### Tahir Alyas , Sikandar Ali , Habib Ullah Khan , Ali Samad , Khalid Alissa , Muhammad Asif Saleem
+
 Jaison Dennis 
 <br/>
 CS7A
@@ -46,15 +48,13 @@ layout: default
 - Docker is the most popular container technology
 - Docker-sec secures containers by implementing access policies to limit capabilities
 
-<!-- 
-The introduction covers key points about how containers work as lightweight virtualization but share the host kernel. This leads to security issues like the container having access to the host and limited isolation between containers. Docker has become the most widely used container technology. The proposed Docker-sec system aims to secure containers by implementing access control policies that constrain capabilities to only legitimate needs.
- -->
+<!--
+Containers work as lightweight virtualization but share the host kernel. 
+This leads to security issues like the container having access to the host and limited isolation between containers. 
+Docker has become the most widely used container technology. 
+The proposed Docker-sec system aims to secure containers by implementing access control policies that constrain capabilities to only legitimate needs.
+-->
 
----
-layout: default
----
-
-![Figure 1](/intro1.png)
 ---
 layout: default
 ---
@@ -125,6 +125,13 @@ level: 2
   - Core component of the Docker Engine and handles the creation, execution, and monitoring of containers. 
 - Containerd :
   - Open-Source container runtime that provides a platform-agnostic interface for managing container lifecycle operations, such as creating, running, and deleting containers.
+
+---
+layout: default
+level: 2
+---
+
+![Figure 1](/intro1.png)
 
 ---
 layout: default
