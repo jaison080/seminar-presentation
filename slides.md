@@ -43,56 +43,13 @@ layout: default
 
 # Introduction 
 
-- Containers are lightweight virtualization that shares host kernel
-- This leads to security issues like host access and limited isolation
-- Docker is the most popular container technology
-- Docker-sec secures containers by implementing access policies to limit capabilities
+- Containers have much less overhead than virtual machines when they run through a kernel that they share with the host computer as user-space operations. 
 
-<!--
-Containers work as lightweight virtualization but share the host kernel. 
-This leads to security issues like the container having access to the host and limited isolation between containers. 
-Docker has become the most widely used container technology. 
-The proposed Docker-sec system aims to secure containers by implementing access control policies that constrain capabilities to only legitimate needs.
--->
-
----
-layout: default
----
-
-# Background
-
-- Containers vs virtual machines - architecture, performance, isolation
-- Docker components - engine, client, daemon, containerd
-- Container image creation and lifecycle management
-
-<!--
-Provide detailed background comparing containers to virtual machines in terms of architecture, performance, and isolation. Explain the key Docker components like the engine which builds container images, the client and daemon for managing containers, and containerd for runtime execution. Cover how images are created and the container lifecycle is managed from build to deployment.
- -->
-
----
-layout: default
-level: 2
----
-
-# Containers vs Virtual Machines
-
-- Overhead:
-  - Containers have less overhead than virtual machines. 
-  - Containers run through a shared kernel with the host computer, resulting in lower resource usage compared to VMs .
-- Isolation:
-  - Containers are considered to be more vulnerable to attacks.
-  - Containers and hosts share the same kernel, malicious containers can potentially exploit the host kernel.
-
----
-layout: default
-level: 2
----
-
-# Containers vs Virtual Machines
-
-- Security Concerns
-  - Containers have been found to have security problems, including malicious container images and vulnerabilities in container applications.
-  - Automated and standardized approaches are needed to implement security updates to Docker images .
+- The device modules can also be used as lightweight units, and their delivery and execution are simplified. 
+- It allows for the automatic control of large-scale systems .
+- In short, everything involves building the container in whatever running environment, application, and all the libraries, triggers, and configuration files needed to run it.
+- Since containers and hosts use the same kernel, malicious containers can quickly leave their environment and make host kernel attacks possible. 
+- Mandatory kernel access control is the best way to improve the security of a Linux container by using tools such as AppArmor or SELinux to prevent unintended operations on both the host and container sides
 
 ---
 layout: default
