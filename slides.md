@@ -265,20 +265,6 @@ layout: default
 level: 2
 ---
 
-# Creating AppArmor Profiles 
-
-- Combination of static analysis and dynamic testing enables Docker-sec to create highly customized AppArmor profiles for each container.
-- The initial profiles are based on the container's settings, such as the mounted directories and files. 
-- These profiles are then dynamically enhanced with rules extracted during the container's execution. 
-- This approach ensures that the profiles accurately reflect the container's behavior and provide effective security measures .
-- Docker-sec enhances container security by restricting the container's access to resources and minimizing the attack surface. 
-- The profiles define the allowed accesses and enforce them, preventing unauthorized actions and reducing the risk of container-based attacks .
-
----
-layout: default
-level: 2
----
-
 # Building Secured RunC Profile
 
 - RunC directly interacts with containers
